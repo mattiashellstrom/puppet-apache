@@ -1,0 +1,16 @@
+steps:
+  - task: apache::ctl
+    target: centos7.example.com
+    description: shutdown
+    parameters:
+      command: graceful-stop
+  - command: "cp /etc/httpd/logs/access_log /tmp/apache_access_log"
+    target: centos7.example.com
+    description: "save logs"
+  - task: package
+    target: centos7.example.com
+    description: "remove apace"
+    parameters:
+      action: uninstall
+      name: httpd
+      
